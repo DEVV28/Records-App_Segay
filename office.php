@@ -46,12 +46,16 @@
 
         // Create Query
         $query = 'SELECT * FROM office ORDER BY name LIMIT '. $page_first_result .',' . $results_per_page . '';
+
         // Get the result
         $result = mysqli_query($conn, $query);
+
         // Fetch the data
         $offices = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
         // Free result
         mysqli_free_result($result);
+
         // Close the connection
         mysqli_close($conn);
     ?>

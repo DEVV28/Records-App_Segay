@@ -45,21 +45,17 @@
         //determine the sql LIMIT startinig number for the results on the display page
         $page_first_result = ($page-1) * $results_per_page;
 
-        
-
         // Create Query
         $query = 'SELECT transaction.datelog, transaction.documentcode, transaction.action, transaction.remarks, office.name as office_name, CONCAT(employee.lastname, ", ", employee.firstname) as employee_fullname FROM employee, office, transaction 
         WHERE transaction.employee_id=employee.id and transaction.office_id=office.id ORDER BY transaction.documentcode, transaction.datelog LIMIT '. $page_first_result .',' . $results_per_page . '';
 
-
         // Get the result
-
         $result = mysqli_query($conn, $query);
+        
         // Fetch the data
-
         $transactions = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        // Free result
 
+        // Free result
         mysqli_free_result($result);
         // Close the connection
 
