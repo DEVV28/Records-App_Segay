@@ -39,6 +39,7 @@
         </div>
         <div class="main-panel">
             <?php include('includes/navbar.php');?>
+            
             <div class="content">
                 <div class="container-fluid">
                     <div class="section">
@@ -46,8 +47,14 @@
                     <div class="row">
                         <div class="col-md-12">
                                 <div class="card strpied-tabled-with-hover">
-                                    <div class="card-header ">
-                                        <h4 class="card-title">Striped Table with Hover</h4>
+                                <br/>
+                                <div class="col-md-12">
+                                    <a href="/employee-add.php">
+                                        <button type="submit" class="btn btn-info btn-fill pull-right">Add New Employee</button>
+                                    </a>
+                                </div>
+                            <div class="card-header ">
+                                        <h4 class="card-title">Employees</h4>
                                         <p class="card-category">Here is a subtitle for this table</p>
                                     </div>
                                     <div class="card-body table-full-width table-responsive">
@@ -57,6 +64,8 @@
                                                 <th>First Name</th>
                                                 <th>Address</th>
                                                 <th>Office</th>
+
+
                                             </thead>
                                             <tbody>
                                                 <?php foreach($offices as $offices) : ?>
