@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative Tim</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -19,37 +19,73 @@
 </head>
 
 <body>
-<?php
+    <?php
         require('config/config.php');
         require('config/db.php');
 
-        $query = "SELECT * FROM office ORDER BY name";
-        $result = mysqli_query($conn, $query);
-        $offices = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        mysqli_free_result($result);
-        mysqli_close($conn);
+                //define total number of results you want per page
+                $results_per_page = 25;
 
-        ?>
+                //find the toal number of results/rows stored in database
+                $query = "SELECT * FROM office";
+                $result = mysqli_query($conn, $query);
+                $number_of_result = mysqli_num_rows($result);
+                
+                //determine the total number of pages available
+                $number_of_page = ceil($number_of_result / $results_per_page);
+                
+                //determine which page number visitor is currently on
+                if(!isset($_GET['page'])){
+                    $page = 1;
+                }else{
+                    $page = $_GET['page'];
+                }
+                
+                //determine the sql LIMIT startinig number for the results on the display page
+                $page_first_result = ($page-1) * $results_per_page;
+
+        // Create Query
+
+        $query = 'SELECT * FROM office ORDER BY name LIMIT '. $page_first_result .',' . $results_per_page . '';
+        // Get the result
+
+        $result = mysqli_query($conn, $query);
+        // Fetch the data
+
+        $offices = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        // Free result
+
+        mysqli_free_result($result);
+        // Close the connection
+
+        mysqli_close($conn);
+    ?>
     <div class="wrapper">
-        <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
+        <div class="sidebar" data-image="assets/img/sidebar-5.jpg">
+
             <div class="sidebar-wrapper">
                 <?php include('includes/sidebar.php'); ?>
-
-                </ul>
+                
             </div>
         </div>
         <div class="main-panel">
             <?php include('includes/navbar.php'); ?>
-            
+
             <div class="content">
                 <div class="container-fluid">
                     <div class="section">
                     </div>
-                    <div class = "row">
-                        <div class="col-md-12">
+                    <div class="row">
+                    <div class="col-md-12">
                             <div class="card strpied-tabled-with-hover">
+                                <br/>
+                                <div class="col-md-12">
+                                    <a href="office-add.php">
+                                        <button type="submit" class="btn btn-info btn-fill pull-right">Add New Office</button>
+                                    </a>
+                                </div>
                                 <div class="card-header ">
-                                    <h4 class="card-title">Striped Table with Hover</h4>
+                                    <h4 class="card-title">Offices</h4>
                                     <p class="card-category">Here is a subtitle for this table</p>
                                 </div>
                                 <div class="card-body table-full-width table-responsive">
@@ -61,26 +97,31 @@
                                             <th>Address</th>
                                             <th>City</th>
                                             <th>Country</th>
-                                            <th>Postal code</th>
+                                            <th>Postal</th>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($offices as $office) : ?>
+                                            <?php foreach($offices as $office) : ?>
                                             <tr>
-                                                <td><?php echo $office ['name']; ?></td>
-                                                <td><?php echo $office ['contactnum']; ?></td>
-                                                <td><?php echo $office ['email']; ?></td>
-                                                <td><?php echo $office ['address']; ?></td>
-                                                <td><?php echo $office ['city']; ?></td>
-                                                <td><?php echo $office ['country']; ?></td>
-                                                <td><?php echo $office ['postal']; ?></td>
+                                                <td><?php echo $office['name']; ?></td>
+                                                <td><?php echo $office['contactnum']; ?></td>
+                                                <td><?php echo $office['email']; ?></td>
+                                                <td><?php echo $office['address']; ?></td>
+                                                <td><?php echo $office['city']; ?></td>
+                                                <td><?php echo $office['country']; ?></td>
+                                                <td><?php echo $office['postal']; ?></td>
                                             </tr>
-                                                <?php endforeach ?>
+                                            <?php endforeach ?>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <?php
+                        for($page=1; $page <= $number_of_page; $page++){
+                            echo '<a href = "office.php?page='. $page .'">' . $page . '</a>';
+                        }
+                    ?>
                 </div>
             </div>
             <footer class="footer">
