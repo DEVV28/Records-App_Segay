@@ -48,15 +48,12 @@
                     VALUES('$documentcode', '$action', '$remarks', '$employee_id', '$office_id')";
 
                     // Execute query
-
-                    if(mysqli_query($conn, $query)){
                        
                     }else{
                         echo 'ERRO: '. mysqli_error($conn);
                     }
 
-                }
-
+                
 
 
         ?>

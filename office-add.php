@@ -50,14 +50,11 @@
                     VALUES('$name', '$contactnum', '$email', '$address', '$city','$country', '$postal')";
 
                     // Execute query
-
-                    if(mysqli_query($conn, $query)){
-                       
                     }else{
                         echo 'ERRO: '. mysqli_error($conn);
                     }
 
-                }
+                
 
 
             ?>
