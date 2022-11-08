@@ -1,8 +1,8 @@
 <?php
-
-    require('vendor/autoload.php');
-    require_once('config\config.php');
-    require_once('config\db.php');
+    
+        require('vendor/autoload.php');
+        require_once('config\config.php');
+        require_once('config\db.php');
 
     $actions = array('IN', 'OUT', 'COMPLETE');
     $remarks = array('Signed', 'For approval', 'Pending','');

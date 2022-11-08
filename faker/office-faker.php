@@ -1,8 +1,7 @@
 <?php
-
-    require('vendor/autoload.php');
-    require_once('config\config.php');
-    require_once('config\db.php');
+        require('vendor/autoload.php');
+        require_once('config\config.php');
+        require_once('config\db.php');
     
 
     $faker = Faker\Factory::create('en_PH');
