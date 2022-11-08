@@ -45,17 +45,20 @@
                     $postal = mysqli_real_escape_string($conn, $_POST['postal']);
 
                     // Create insert query
-                    $query = "INSERT INTO office(name, contactnum, email, address, city, country, postal)
-                        VALUES('$name', '$contactnum', '$email', '$address', '$city','$country', '$postal')";
-                     
+
+                    $query = "INSERT INTO recordsapp.office(name, contactnum, email, address, city, country, postal)
+                    VALUES('$name', '$contactnum', '$email', '$address', '$city','$country', '$postal')";
+
                     // Execute query
+
                     if(mysqli_query($conn, $query)){
-                  
+                       
                     }else{
                         echo 'ERRO: '. mysqli_error($conn);
                     }
 
                 }
+
 
             ?>
             <div class="content">

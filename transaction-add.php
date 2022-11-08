@@ -34,24 +34,29 @@
             require('config/db.php');
 
             //check if submitted
-            if(isset($_POST['submit'])) {
+                if(isset($_POST['submit'])) {
                     // Get form data
                     $documentcode = mysqli_real_escape_string($conn, $_POST['documentcode']);
                     $action = mysqli_real_escape_string($conn, $_POST['action']);
                     $remarks = mysqli_real_escape_string($conn, $_POST['remarks']);
+                    $employee_id = mysqli_real_escape_string($conn, $_POST['employee']);
+                    $office_id = mysqli_real_escape_string($conn, $_POST['office']);
 
                     // Create insert query
-                    $query = "INSERT INTO transactions(documentcode, action, remarks)
-                    VALUES('$documentcode', '$action' '$remarks')";
 
-                   // Execute query
-                   if(mysqli_query($conn, $query)){
+                    $query = "INSERT INTO recordsapp.transaction(documentcode, action, remarks, employee_id, office_id)
+                    VALUES('$documentcode', '$action', '$remarks', '$employee_id', '$office_id')";
+
+                    // Execute query
+
+                    if(mysqli_query($conn, $query)){
                        
-                }else{
-                    echo 'ERRO: '. mysqli_error($conn);
+                    }else{
+                        echo 'ERRO: '. mysqli_error($conn);
+                    }
+
                 }
 
-            }
 
 
         ?>
